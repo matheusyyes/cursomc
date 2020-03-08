@@ -16,7 +16,7 @@ public class PedidoService {
 	@Autowired
 	PedidoRepository repo;
 	
-	public Pedido buscar(Integer id) {
+	public Pedido find(Integer id) {
 		
 		Optional<Pedido> cat = repo.findById(id);
 		
