@@ -12,6 +12,8 @@ public class ValidationError extends StandardError {
 		super(status, msg, timeStamp);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	public List<FildMenssager> getErrors() {
 		return errors;
