@@ -1,9 +1,11 @@
 package com.estudo.cursomc.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.estudo.cursomc.domain.Estado;
 
-public interface EstadoRepository extends JpaRepository<Estado, Integer>{
+@Repository
+public interface EstadoRepository extends JpaRepository<Estado, Integer> {
 
 }

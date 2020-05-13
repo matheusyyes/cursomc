@@ -13,11 +13,12 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
 	@ManyToMany(mappedBy="categorias")
 	private List<Produto> produtos = new ArrayList<>();
 	
@@ -45,7 +46,7 @@ public class Categoria implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public List<Produto> getProdutos() {
 		return produtos;
 	}
@@ -54,7 +55,6 @@ public class Categoria implements Serializable {
 		this.produtos = produtos;
 	}
 
-	//Comparação de objetos pelo seu conteudo e não pelo endereço de memória
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -80,6 +80,4 @@ public class Categoria implements Serializable {
 		return true;
 	}
 
-	
-	
 }

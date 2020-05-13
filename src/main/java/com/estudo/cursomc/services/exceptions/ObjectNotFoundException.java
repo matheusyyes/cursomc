@@ -1,9 +1,9 @@
-package com.estudo.cursomc.services.exception;
+package com.estudo.cursomc.services.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	public ObjectNotFoundException(String msg) {
 		super(msg);
 	}
@@ -11,5 +11,5 @@ public class ObjectNotFoundException extends RuntimeException {
 	public ObjectNotFoundException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
-	
+
 }

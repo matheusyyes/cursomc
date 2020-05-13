@@ -22,7 +22,7 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 	private HttpServletRequest request;
 	
 	@Autowired
-	ClienteRepository repo;
+	private ClienteRepository repo;
 	
 	@Override
 	public void initialize(ClienteUpdate ann) {
@@ -30,18 +30,16 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 
 	@Override
 	public boolean isValid(ClienteDTO objDto, ConstraintValidatorContext context) {
-
+		
 		@SuppressWarnings("unchecked")
 		Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-		Integer uriId =Integer.parseInt(map.get("id"));
-		
+		Integer uriId = Integer.parseInt(map.get("id"));
 		
 		List<FildMenssager> list = new ArrayList<>();
 		
 		Cliente aux = repo.findByEmail(objDto.getEmail());
-		
-		if(aux != null  && !aux.getId().equals(uriId)) {
-			list.add(new FildMenssager("email","Email já existente"));
+		if (aux != null && !aux.getId().equals(uriId)) {
+			list.add(new FildMenssager("email", "Email já existente"));
 		}
 
 		for (FildMenssager e : list) {
@@ -52,3 +50,4 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 		return list.isEmpty();
 	}
 }
+

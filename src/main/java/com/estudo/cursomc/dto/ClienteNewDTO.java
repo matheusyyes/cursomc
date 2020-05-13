@@ -12,41 +12,43 @@ import com.estudo.cursomc.services.validation.ClienteInsert;
 @ClienteInsert
 public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	
-	@NotEmpty(message = "Prenchimento obrigatório")
-	@Length(min = 3, max = 80, message = "O tamanho dever ser entre 5 a 80 caracteres")
-	private String nome;
-	
-	@NotEmpty(message = "Prenchimento obrigatório")
-	@Email(message = "Email inválido")
-	private String email;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
+	private String nome;
+
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Email(message="Email inválido")
+	private String email;
+
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String cpfOuCnpj;
-	private Integer tipoCliente;
+
+	private Integer tipo;
 	
-	@NotEmpty(message = "Prenchimento obrigatório")
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String logradouro;
-	
-	@NotEmpty(message = "Prenchimento obrigatório")
+
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String numero;
-	
+
 	private String complemento;
+
 	private String bairro;
-	
-	@NotEmpty(message = "Prenchimento obrigatório")
+
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String cep;
 	
-	@NotEmpty(message = "Prenchimento obrigatório")
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String telefone1;
+
 	private String telefone2;
-	private String telefone3;
 	
+	private String telefone3;
+
 	private Integer cidadeId;
 	
 	public ClienteNewDTO() {
-		
 	}
 
 	public String getNome() {
@@ -65,8 +67,6 @@ public class ClienteNewDTO implements Serializable {
 		this.email = email;
 	}
 
-	
-
 	public String getCpfOuCnpj() {
 		return cpfOuCnpj;
 	}
@@ -75,12 +75,12 @@ public class ClienteNewDTO implements Serializable {
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
-	public Integer getTipoCliente() {
-		return tipoCliente;
+	public Integer getTipo() {
+		return tipo;
 	}
 
-	public void setTipoCliente(Integer tipoCliente) {
-		this.tipoCliente = tipoCliente;
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getLogradouro() {
@@ -154,7 +154,5 @@ public class ClienteNewDTO implements Serializable {
 	public void setCidadeId(Integer cidadeId) {
 		this.cidadeId = cidadeId;
 	}
-	
-	
 	
 }

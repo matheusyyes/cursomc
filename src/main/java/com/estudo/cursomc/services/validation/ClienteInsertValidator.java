@@ -18,7 +18,7 @@ import com.estudo.cursomc.services.validation.utils.BR;
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 
 	@Autowired
-	ClienteRepository repo;
+	private ClienteRepository repo;
 	
 	@Override
 	public void initialize(ClienteInsert ann) {
@@ -26,28 +26,22 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 
 	@Override
 	public boolean isValid(ClienteNewDTO objDto, ConstraintValidatorContext context) {
-
+		
 		List<FildMenssager> list = new ArrayList<>();
-
-		if (objDto.getTipoCliente().equals(TipoCliente.PESSOAFISICA.getCod())
-				&& !BR.isValidCPF(objDto.getCpfOuCnpj())) {
-
-			list.add(new FildMenssager("cpfOuCnpj", "Cpf inválido"));
-
+		
+		if (objDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCod()) && !BR.isValidCPF(objDto.getCpfOuCnpj())) {
+			list.add(new FildMenssager("cpfOuCnpj", "CPF inválido"));
 		}
-		if (objDto.getTipoCliente().equals(TipoCliente.PESSOAJURIDICA.getCod())
-				&& !BR.isValidCNPJ(objDto.getCpfOuCnpj())) {
 
+		if (objDto.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCpfOuCnpj())) {
 			list.add(new FildMenssager("cpfOuCnpj", "CNPJ inválido"));
-
 		}
-		
+
 		Cliente aux = repo.findByEmail(objDto.getEmail());
-		
-		if(aux != null) {
-			list.add(new FildMenssager("email","Email ja existente"));
+		if (aux != null) {
+			list.add(new FildMenssager("email", "Email já existente"));
 		}
-
+		
 		for (FildMenssager e : list) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
@@ -56,3 +50,4 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 		return list.isEmpty();
 	}
 }
+

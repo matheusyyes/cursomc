@@ -13,29 +13,26 @@ import com.estudo.cursomc.domain.Categoria;
 import com.estudo.cursomc.domain.Produto;
 import com.estudo.cursomc.repositories.CategoriaRepository;
 import com.estudo.cursomc.repositories.ProdutoRepository;
-import com.estudo.cursomc.services.exception.ObjectNotFoundException;
-
+import com.estudo.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ProdutoService {
-
-	@Autowired
-	ProdutoRepository repo;
 	
 	@Autowired
-	CategoriaRepository repoCat;
+	private ProdutoRepository repo;
+	
+	@Autowired
+	private CategoriaRepository categoriaRepository;
 	
 	public Produto find(Integer id) {
-		
-		Optional<Produto> cat = repo.findById(id);
-		
-		return cat.orElseThrow(() -> new ObjectNotFoundException(  "Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName()));
+		Optional<Produto> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName()));
 	}
-	
-	public Page<Produto> search(String nome,List<Integer> ids, Integer page, Integer linesPerPage, String ordeBy, String direction){
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction) , ordeBy);
-		List<Categoria>categorias = repoCat.findAllById(ids);
-		return repo.search(nome, categorias, pageRequest);
+
+	public Page<Produto> search(String nome, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		List<Categoria> categorias = categoriaRepository.findAllById(ids);
+		return repo.findDistinctByNomeContainingAndCategoriasIn(nome, categorias, pageRequest);	
 	}
-	
 }
